@@ -1,32 +1,32 @@
-var formulario = document.querySelector("#form")
+/* Evitar usar var, lo cambié por const. y form no aparece como un ID en el HTML, lo cambié por .formlario */
+const formulario = document.querySelector(".formulario");
 
-formulario.onsubmit = function(e) {
+/* e no me da nada de inforamción de qué hace la función, y la función no tiene nombre, los cambiaré */
+formulario.onsubmit = function revisarErroresYAgregarInvitadoSinErrores(submitFormEvent) {
 
-  e.prevent();
+  /* Googleé el .prevent y sólo me salieron resultados de .preventDefault(), lo dejaré en nota en lo que entiendo cómo funciona el resto */
+  submitFormEvent.preventDefault();
+
+  /* Los nombres de las variables no son suficientemente explícitos, los cambio. También cambiaré var por const. */
+  const nombreDivInHTML = formulario.elements[0];
+  const nombre = nombreDivInHTML.value;
+
+  const edadDivInHTML = formulario.elements[1];
+  const edad = edadDivInHTML.value;
   
-  var n = formulario.elements[0]
-  var e = formulario.elements[1]
-  var na = formulario.elements[2]
+  const index = (formulario.elements[2]).selectedIndex;
+  const nacionalidad = (formulario.elements[2]).options[index].value;
 
-  var nombre = n.value
-  var edad = e.value
+  /* Junté los dos console log en uno solo */
+  console.log(`Nombre: ${nombre}, Edad: ${edad}, Nacionalidad: ${nacionalidad}`);
 
-  var i = na.selectedIndex
-  var nacionalidad = na.options[i].value
-  console.log(nombre, edad)
-  console.log(nacionalidad)
-
+  /* Cambié el tercer if por un else y el segundo por un else if */
   if (nombre.length === 0) {
-    n.classList.add("error")
-  }
-  if (edad < 18 || edad > 120) {
-    e.classList.add("error")
-  }
-
-if (nombre.length > 0 
-  && (edad > 18 
-    && edad < 120) ) {
-  agregarInvitado(nombre, edad, nacionalidad)
+    nombreDivInHTML.classList.add("error")
+  } else if (edad < 18 || edad > 120) {
+    edadDivInHTML.classList.add("error")
+  } else {
+    agregarInvitado(nombre, edad, nacionalidad)
   }
 }
 
@@ -39,6 +39,8 @@ document.body.appendChild(botonBorrar);
 
 function agregarInvitado(nombre, edad, nacionalidad) {
 
+
+  /* Voy a comentar (o en otras palabras borrar) todo esto porque me parece mejor sólo cambiarlo en el HTML, incluso ofrecería mayor claridad
   if (nacionalidad === "ar") {
     nacionalidad = "Argentina"
   }
@@ -52,46 +54,50 @@ function agregarInvitado(nombre, edad, nacionalidad) {
     nacionalidad = "Peruana"
   }
 
-var lista = document.getElementById("lista-de-invitados")
+  */
 
-var elementoLista = document.createElement("div")
-elementoLista.classList.added("elemento-lista")
-lista.appendChild(elementoLista)
+  var lista = document.getElementById("lista-de-invitados")
 
-var spanNombre = document.createElement("span")
-var inputNombre = document.createElement("input")
-var espacio = document.createElement("br")
-spanNombre.textContent = "Nombre: "
-inputNombre.value = nombre 
-elementoLista.appendChild(spanNombre)
-elementoLista.appendChild(inputNombre)
-elementoLista.appendChild(espacio)
+  var elementoLista = document.createElement("div")
+  elementoLista.classList.added("elemento-lista")
+  lista.appendChild(elementoLista)
 
-function crearElemento(descripcion, valor) {
-var spanNombre = document.createElement("span")
-var inputNombre = document.createElement("input")
-var espacio = document.createElement("br")
-spanNombre.textContent = descripcion + ": "
-inputNombre.value = valor 
-elementoLista.appendChild(spanNombre)
-elementoLista.appendChild(inputNombre)
-elementoLista.appendChild(espacio)
-}
+  var spanNombre = document.createElement("span")
+  var inputNombre = document.createElement("input")
+  var espacio = document.createElement("br")
+  spanNombre.textContent = "Nombre: "
+  inputNombre.value = nombre
+  elementoLista.appendChild(spanNombre)
+  elementoLista.appendChild(inputNombre)
+  elementoLista.appendChild(espacio)
 
-crearElemento("Nombre", nombre)
-crearElemento("Edad", edad)
-crearElemento("Nacionalidad", nacionalidad)
+  function crearElemento(descripcion, valor) {
+    var spanNombre = document.createElement("span")
+    var inputNombre = document.createElement("input")
+    var espacio = document.createElement("br")
+    spanNombre.textContent = descripcion + ": "
+    inputNombre.value = valor
+    elementoLista.appendChild(spanNombre)
+    elementoLista.appendChild(inputNombre)
+    elementoLista.appendChild(espacio)
+  }
+
+  crearElemento("Nombre", nombre)
+  crearElemento("Edad", edad)
+  crearElemento("Nacionalidad", nacionalidad)
 
 
-var botonBorrar = document.createElement("button")
-botonBorrar.textContent = "Eliminar invitado"
-botonBorrar.id = "boton-borrar"
-var corteLinea = document.createElement("br")
-elementoLista.appendChild(corteLinea)
-elementoLista.appendChild(botonBorrar);
+  var botonBorrar = document.createElement("button")
+  botonBorrar.textContent = "Eliminar invitado"
+  botonBorrar.id = "boton-borrar"
+  var corteLinea = document.createElement("br")
+  elementoLista.appendChild(corteLinea)
+  elementoLista.appendChild(botonBorrar);
 
- botonBorrar.onclick = function() {
-// this.parentNode.style.display = 'none';
-botonBorrar.parentNode.remove()
+  botonBorrar.onclick = function () {
+    // this.parentNode.style.display = 'none';
+    botonBorrar.parentNode.remove()
   }
 }
+
+/* Uso la opción de format document con frecuencia, probablemente también cambié el acomodo de las líneas como consecuencia */

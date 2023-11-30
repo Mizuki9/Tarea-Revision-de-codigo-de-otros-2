@@ -8,6 +8,7 @@
   <link rel="stylesheet" type="text/css" media="screen" href="./styles.css">
   <title>Formulario</title>
 </head>
+
 <body>
   <h1>Bienvenidos a mi fiesta</h1>
   <h2>Por favor, confirmar asistencia:</h2>
@@ -20,10 +21,11 @@
 
     Nacionalidad
     <select name="nationality" id="nationality">
-      <option value="ar">Argentina</option>
-      <option value="mx">Mexicana</option>
-      <option value="per">Peruana</option>
-      <option value="vnzl">Venezolana</option>
+<!-- Ver comentario en el JS de por qué cambié los values de las nacionalidades -->
+      <option value="Argentina">Argentina</option>
+      <option value="Mexicana">Mexicana</option>
+      <option value="Peruana">Peruana</option>
+      <option value="Venezolana">Venezolana</option>
     </select>
     <br />
     <input type="submit">
@@ -34,7 +36,10 @@
 
   </div>
 
-  <script src="../formulario.js"></script>
+  <!--   El Script no está correctamente enlazado porque tiene 1 puntos en lugar de sólo 1 -->
+  <script src="./formulario.js"></script>
 </body>
 
 </html>
+
+<!-- Uso la opción de format document con frecuencia, probablemente también cambié el acomodo de las líneas como consecuencia -->
